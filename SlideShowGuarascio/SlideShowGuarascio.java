@@ -42,6 +42,7 @@ public class SlideShow extends Applet implements Runnable,MouseListener, ActionL
     //ac=getAudioClip(getDocumentBase(),getParameter("audio"));
     //ac.loop();
    }
+
         
   //definiamo il comportamento del thread nel metodo
     @Override
