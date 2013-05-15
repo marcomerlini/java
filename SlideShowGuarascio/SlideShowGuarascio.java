@@ -136,5 +136,5 @@ public class SlideShow extends Applet implements Runnable,MouseListener, ActionL
     }
 
 	@Override
-}//Ciao Prof guarascio.... ////Buongiorno, mi scusi
+}
 
