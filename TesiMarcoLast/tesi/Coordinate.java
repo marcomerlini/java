@@ -44,6 +44,12 @@ public class Coordinate
          return ( ((c - (row() * 4)) * 2) - 2 );
    }
    
+   public int toInt()
+   {
+	   String s = this.toString();
+       int num = Integer.parseInt(s);
+	   return num;
+   }
    
    public String toString()
    {

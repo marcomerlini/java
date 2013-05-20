@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import lejos.nxt.Motor;
 import lejos.nxt.NXT;
 import lejos.util.Delay;
 
@@ -34,6 +35,7 @@ public class MainFrame extends JFrame {
    public int[] CmuCam = new int[32]; 
    private Coordinate[] mossa= new Coordinate[2];
    private Coordinate[] mossamult= new Coordinate[2];
+   public float[][] cordinate =new float[2][32];	//dove risiedono tutte le coordinate delle varie celle
      
   
    private void outputText(String s)
@@ -46,14 +48,13 @@ public class MainFrame extends JFrame {
    
    public MainFrame() 
    {
-	   Coordinate c= new Coordinate(1);
       thinkDepth = LEVEL2;
       System.out.println("Please make the first move");
       state = FROM; 
       board.initialize();
       String s=board.toString();
       outputText(s);
-      //computerMoves();
+      computerMoves();
    }
 
 
@@ -85,11 +86,11 @@ public static void main(String args[])
                   break;
                case FROM_MULTIPLE:
             	  mossamult=controllo();
-                  from = mossa[0];
+                  from = mossamult[0];
                   state = TO_MULTIPLE;
                   break;
                case TO_MULTIPLE:
-                  multipleJumps(from,mossa[1]);
+                  multipleJumps(from,mossamult[1]);
                   break;
             }        
    }        
@@ -148,18 +149,26 @@ public static void main(String args[])
          board.getHistory().reset();
          Board comBoard = Rules.minimaxAB(board, thinkDepth, computerColor,Rules.minusInfinityBoard(),Rules.plusInfinityBoard());                                        
          Move move = comBoard.getHistory().first();
-         board = Rules.executeMove(move, board);
+         board = Rules.executeMove(move, board); //rinnovo della board
          MoveIterator iterator = board.getHistory().getIterator();
          String moves = "";
          while (iterator.hasNext()) 
          {
             moves = moves + iterator.next();
-            if (iterator.hasNext()) moves = moves + " , ";
+            if (iterator.hasNext())
+            	{
+            		moves = moves + " , ";
+                    Coordinate fromcoo = move.checker.position;
+                    int from = fromcoo.toInt();	//ricontrollare perchè così ne fa solo una di mossa
+                    Coordinate tocoo = move.destination;
+                    int to = tocoo.toInt();
+                    sposta(from, to);
+                    
+            	}
          }      
          outputText("Computer moves: " + moves);
          String s=board.toString();
          outputText(s);
-         
          state = FROM;
          validMoves = Rules.findAllValidMoves(board, userColor);
          if (validMoves.size() == 0) 
@@ -346,8 +355,26 @@ public static void main(String args[])
       return move;
    }
    
-   
-   // Transform a coordinate from the Board grid (1-32) to the GUI grid (0-63).
+	public void sposta(int from,int to)
+	{
+		float [] daa = new float[2];
+		int controllo=from;
+		for(int i=0;i<2;i++)
+		{
+			daa[i]=cordinate[i][controllo];
+			controllo=to;
+		}
+		movimento(daa);
+	}
+	
+   private void movimento(float[] daa) 
+   {
+	   Motor.A.forward();
+	   //fare il movimento dei bracci
+   }
+
+
+// Transform a coordinate from the Board grid (1-32) to the GUI grid (0-63).
    private int findSquare(int c) {
       int row = new Coordinate(c).row();
       if (row % 2 == 0)
