@@ -8,8 +8,8 @@ import lejos.nxt.Motor;
 import lejos.nxt.NXT;
 import lejos.util.Delay;
 
-public class MainFrame extends JFrame {
-
+public class MainFrame extends JFrame 
+{
    // Levels.
    private static final int LEVEL2 = 5;
    private int thinkDepth = LEVEL2;    // Default.
@@ -158,14 +158,14 @@ public static void main(String args[])
             if (iterator.hasNext())
             	{
             		moves = moves + " , ";
-                    Coordinate fromcoo = move.checker.position;
-                    int from = fromcoo.toInt();	//ricontrollare perchè così ne fa solo una di mossa
-                    Coordinate tocoo = move.destination;
-                    int to = tocoo.toInt();
-                    sposta(from, to);
                     
             	}
          }      
+         Coordinate fromcoo = move.checker.position;
+         int from = fromcoo.toInt();	//ricontrollare perchè così ne fa solo una di mossa
+         Coordinate tocoo = move.destination;
+         int to = tocoo.toInt();
+         sposta(from, to);
          outputText("Computer moves: " + moves);
          String s=board.toString();
          outputText(s);
