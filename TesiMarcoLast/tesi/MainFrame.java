@@ -64,7 +64,6 @@ public static void main(String args[])
       MainFrame m = new MainFrame();
    }
    
-   
    /**
     * Performs an action depending on the state of the game. It gets the action
     * from the CheckerButton class.
