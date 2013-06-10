@@ -27,16 +27,18 @@ public class MainFrame extends JFrame
    private static final int USER_MOVES_FIRST = 1;  
    private int firstMove = USER_MOVES_FIRST;
    private Checker multipleJumpsChecker = null;
-   private int userColor = Checker.WHITE;
-   private int computerColor = Checker.BLACK;
+   private static int userColor = Checker.WHITE;
+   private static int computerColor = Checker.BLACK;
    private Coordinate from;
    private Board board = new Board();
    public Board CmuCamboard = new Board();
-   public int[] CmuCam = new int[32]; 
+   public static int[] CmuCam = new int[32]; 
    private Coordinate[] mossa= new Coordinate[2];
    private Coordinate[] mossamult= new Coordinate[2];
    public float[][] cordinate =new float[2][32];	//dove risiedono tutte le coordinate delle varie celle
-     
+   public static Camera cmucam =new Camera();
+   public static String [] position =new String[32];
+   public static int controllo =0;
   
    private void outputText(String s)
    {
@@ -94,8 +96,49 @@ public static void main(String args[])
             }        
    }        
       
-   //arriva il vettore dalla CmuCam4
-   //controllo se è avvenuta o meno una mossa
+   
+   public static void buildBoard()
+   {
+	   String[]histogram= new String[3];
+	   //controllare se 0 o 1 l'inizio
+	   for(int posi=1;posi<33;posi++)
+	   {
+		   histogram=cmucam.start(position[posi]);
+		   colore(histogram);
+	   }
+   }
+   
+   
+   
+   private static void colore(String[] histogram) 
+   {
+	   //se la casella è rossa
+	   if()
+	   {
+		   CmuCam[controllo]=userColor;
+		   controllo++;
+	   }
+	   //se la casella è verde
+	   if()
+	   {
+		   CmuCam[controllo]=computerColor;
+		   controllo++;
+	   }
+	   //se la casella è nera
+	   if()
+	   {
+		   CmuCam[controllo]=5;
+		   controllo++;
+	   }
+	   
+	   if(controllo==31)
+	   {
+		   controllo=0;
+	   }
+   }
+
+
+//controllo se è avvenuta o meno una mossa
    //se avviene chiama una funzione per vedere il cambiamento che è stato fatto
    private Coordinate[] controllo() 
    {
@@ -104,7 +147,8 @@ public static void main(String args[])
 	   
 	   while(control)
 	   {
-		 //arrivo vettore da CmuCam4
+		   //costruzione della CmuCam board
+		   buildBoard();
 		   CmuCamboard.VettoreToBoard(CmuCam);
 		   if(!(CmuCamboard.equals(board)))
 	   		{
