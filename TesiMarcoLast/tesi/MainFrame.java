@@ -35,23 +35,22 @@ public class MainFrame extends JFrame
    public static int[] CmuCam = new int[32]; 
    private Coordinate[] mossa= new Coordinate[2];
    private Coordinate[] mossamult= new Coordinate[2];
-   public float[][] cordinate =new float[2][32];	//dove risiedono tutte le coordinate delle varie celle
+   public static int[][] cordinate =new int[32][3];	//dove risiedono tutte le coordinate delle varie celle
    public static Camera cmucam =new Camera();
    public static String [] position =new String[32];
-   public static int controllo =0;
+   public static int check =0;
   
    private void outputText(String s)
    {
       System.out.println(s);
    }
    
-   
    // ********** Functionality ***********
    
-   public MainFrame() 
+   public void start() 
    {
       thinkDepth = LEVEL2;
-      System.out.println("Please make the first move");
+      System.out.println("The computer make the first move");
       state = FROM; 
       board.initialize();
       String s=board.toString();
@@ -62,8 +61,46 @@ public class MainFrame extends JFrame
 
    @SuppressWarnings("deprecation")
 public static void main(String args[]) 
-   {
+   {   
+	   //spostemento motori in secondi
+	   //Motore A				//Motore B				//Motore C 
+	   cordinate[0][0]=7000;	cordinate[0][1]=1200;	cordinate[0][2]=-15000;
+	   cordinate[1][0]=5500;	cordinate[1][1]=700;	cordinate[1][2]=-3300;
+	   cordinate[2][0]=3000;	cordinate[2][1]=750;	cordinate[2][2]=11000;
+	   cordinate[3][0]=1500;	cordinate[3][1]=1150;	cordinate[3][2]=21000;
+	   cordinate[4][0]=8000;	cordinate[4][1]=1300;	cordinate[4][2]=-9000;
+	   cordinate[5][0]=6000;	cordinate[5][1]=1200;	cordinate[5][2]=3300;
+	   cordinate[6][0]=4000;	cordinate[6][1]=1300;	cordinate[6][2]=14000;
+	   cordinate[7][0]=2500;	cordinate[7][1]=1700;	cordinate[7][2]=21000;
+	   cordinate[8][0]=7000;	cordinate[8][1]=1900;	cordinate[8][2]=-10000;
+	   cordinate[9][0]=6000;	cordinate[9][1]=1500;	cordinate[9][2]=2000;
+	   cordinate[10][0]=5000;	cordinate[10][1]=1600;	cordinate[10][2]=7000;
+	   
+	   cordinate[11][0]=3500;	cordinate[11][1]=1800;	cordinate[11][2]=16000;
+	   cordinate[12][0]=5000;	cordinate[12][1]=2000;	cordinate[12][2]=-5500;
+	   cordinate[13][0]=7000;	cordinate[13][1]=2000;	cordinate[13][2]=2000;
+	   cordinate[14][0]=5500;	cordinate[14][1]=2100;	cordinate[14][2]=10000;
+	   cordinate[15][0]=4000;	cordinate[15][1]=2400;	cordinate[15][2]=16500;
+	   cordinate[16][0]=10000;	cordinate[16][1]=2700;	cordinate[16][2]=-9000;
+	   cordinate[17][0]=8000;	cordinate[17][1]=2400;	cordinate[17][2]=-2500;
+	   cordinate[18][0]=7500;	cordinate[18][1]=2500;	cordinate[18][2]=6000;
+	   cordinate[19][0]=6000;	cordinate[19][1]=2700;	cordinate[19][2]=12000;
+	   
+	   cordinate[20][0]=9500;	cordinate[20][1]=3000;	cordinate[20][2]=-5500;
+	   cordinate[21][0]=8000;	cordinate[21][1]=2900;	cordinate[21][2]=1000;
+	   cordinate[22][0]=5000;	cordinate[22][1]=3000;	cordinate[22][2]=9000;
+	   cordinate[23][0]=5000;	cordinate[23][1]=3500;	cordinate[23][2]=14000;
+	   cordinate[24][0]=12000;	cordinate[24][1]=3800;	cordinate[24][2]=-8000;
+	   cordinate[25][0]=10500;	cordinate[25][1]=3500;	cordinate[25][2]=-2000;
+	   cordinate[26][0]=9500;	cordinate[26][1]=3600;	cordinate[26][2]=4000;
+	   cordinate[27][0]=9000;	cordinate[27][1]=3800;	cordinate[27][2]=9500;
+	   cordinate[28][0]=13000;	cordinate[28][1]=4300;	cordinate[28][2]=-4500;
+	   cordinate[29][0]=11500;	cordinate[29][1]=4200;	cordinate[29][2]=700;
+	   
+	   cordinate[30][0]=10500;	cordinate[30][1]=4200;	cordinate[30][2]=6000;
+	   cordinate[31][0]=11000;	cordinate[31][1]=4700;	cordinate[31][2]=11000;
       MainFrame m = new MainFrame();
+      m.start();
    }
    
    /**
@@ -103,29 +140,28 @@ public static void main(String args[])
 	   //controllare se 0 o 1 l'inizio
 	   for(int posi=1;posi<33;posi++)
 	   {
+		   //histogram(0=red,1=green,2=blue)
 		   histogram=cmucam.start(position[posi]);
 		   colore(histogram);
 	   }
    }
    
-   
-   
    private static void colore(String[] histogram) 
    {
 	   //se la casella è rossa
-	   if()
+	   if((<histogram[0]<)&&(<histogram[1]<)&&(<histogram[2]<))
 	   {
 		   CmuCam[controllo]=userColor;
 		   controllo++;
 	   }
 	   //se la casella è verde
-	   if()
+	   if((<histogram[0]<)&&(<histogram[1]<)&&(<histogram[2]<))
 	   {
 		   CmuCam[controllo]=computerColor;
 		   controllo++;
 	   }
 	   //se la casella è nera
-	   if()
+	   if((<histogram[0]<)&&(<histogram[1]<)&&(<histogram[2]<))
 	   {
 		   CmuCam[controllo]=5;
 		   controllo++;
@@ -400,22 +436,116 @@ public static void main(String args[])
    
 	public void sposta(int from,int to)
 	{
-		float [] daa = new float[2];
-		int controllo=from;
+		int da[]= new int[3];
+		int a[]= new int[3];
 		for(int i=0;i<2;i++)
 		{
-			daa[i]=cordinate[i][controllo];
-			controllo=to;
+			if(i==0)
+			{
+				for(int k=0;k<3;k++)
+				{
+					da[k]=cordinate[from][k];
+					if(da[2]<0)
+					{
+						check=1;
+					}
+				}
+				movimento(da);
+				check=0;
+			}
+			if(i==1)
+			{
+				for(int k=0;k<3;k++)
+				{
+					a[k]=cordinate[to][k];
+					if(k==2)
+					{
+						
+						if((da[2]<0) && (a[2]<0))
+						{
+							int ris=a[2]-da[2];
+							if(ris<0)
+							{
+								a[2]=-ris;
+								check=1;
+							}
+							if(ris>0)
+							{
+								a[2]=ris;
+								check=0;
+							}
+							else
+							{
+								a[2]=0;
+							}
+						}
+						
+						if((da[2]<0) && (a[2]>0))
+						{
+							a[2]=a[2]-da[2];					
+							check=0;
+						}
+						//da fare
+						if((da[2]>0) && (a[2]<0))
+						{
+							a[2]=da[2]-a[2];
+							check=1;
+
+						}
+			
+						if((da[2]>0) && (a[2]>0))
+						{
+							int ris=a[2]-da[2];
+							if(ris<0)
+							{
+								a[2]=-ris;
+								check=0;
+							}
+							if(ris>0)
+							{
+								a[2]=ris;
+								check=1;
+							}
+							else
+							{
+								a[2]=0;
+							}
+						}
+					}		
+				}
+				movimento(a);
+			}
 		}
-		movimento(daa);
+		
 	}
 	
-   private void movimento(float[] daa) 
+   private void movimento(int[] daa) 
    {
-	   Motor.A.forward();
-	   //fare il movimento dei bracci
+	   if(check==0)
+	   {
+		   Motor.A.forward();
+		   Delay.msDelay(daa[0]);
+		   Motor.A.stop();
+		   Motor.B.forward();
+		   Delay.msDelay(daa[1]);
+		   Motor.B.stop();
+		   Motor.C.forward();
+		   Delay.msDelay(daa[2]);
+		   Motor.C.stop();
+	   }
+	   if(check==1)
+	   {
+		   Motor.A.forward();
+		   Delay.msDelay(daa[0]);
+		   Motor.A.stop();
+		   Motor.B.forward();
+		   Delay.msDelay(daa[1]);
+		   Motor.B.stop();
+		   Motor.C.backward();
+		   Delay.msDelay(-daa[2]);
+		   Motor.C.stop();
+	   }
    }
-
 
 // Transform a coordinate from the Board grid (1-32) to the GUI grid (0-63).
    private int findSquare(int c) {

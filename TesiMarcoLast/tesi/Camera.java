@@ -258,7 +258,6 @@ public class Camera
         	    {
         		   histogram[i] +=(char)result[k];
         	    }
-        	  CAM_GET_HISTOG="";
           }
           Delay.msDelay(200);
       }

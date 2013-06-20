@@ -2,7 +2,6 @@ package tesi;
 
 import javax.swing.ImageIcon; 
 import java.net.URL;
-import tesi.CheckersApplet;
 
 public class BlackChecker extends Checker
 {
@@ -23,13 +22,7 @@ public class BlackChecker extends Checker
    
    public ImageIcon getIcon() 
    {
-      ImageIcon icon = null;
-      if (value == BLACK_VALUE_NORMAL)
-         return CheckersApplet.getBlackCheckerIcon();    // Applet.
-         //return new ImageIcon("images/black.gif");     // Normal application.
-      else 
-         return CheckersApplet.getBlackKingCheckerIcon();
-         //return new ImageIcon("images/blackKing.gif");
+      return null;
    }
    
    

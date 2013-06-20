@@ -22,12 +22,7 @@ public class WhiteChecker extends Checker {
   
   
    public ImageIcon getIcon() {
-      if (value == WHITE_VALUE_NORMAL)
-         return CheckersApplet.getWhiteCheckerIcon();
-         //return new ImageIcon("images/white.gif");
-      else
-         return CheckersApplet.getWhiteKingCheckerIcon();
-         //return new ImageIcon("images/whiteKing.gif");
+    return null;
    }
 
    
